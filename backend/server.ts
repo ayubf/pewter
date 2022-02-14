@@ -1,6 +1,7 @@
 import express from 'express'
 
 import authRouter from './routes/auth'
+import postsRouter from './routes/posts'
 
 const server = express();
 
@@ -24,5 +25,6 @@ server.use(function(req, res, next) {
 server.use(express.json());
 
 server.use('/', authRouter);
+server.use('/posts', postsRouter)
 
 server.listen(3001);
