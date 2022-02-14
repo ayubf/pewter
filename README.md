@@ -2,4 +2,4 @@
  Social media mobile app written in TypeScript with React Native
 
 Front end: React Native
-Back end: Express, Redis
+Back end: Express, PostgreSQL
