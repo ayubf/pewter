@@ -13,6 +13,7 @@ CREATE TABLE posts(
     userId INT NOT NULL, 
     Id SERIAL PRIMARY KEY,
     postTitle TEXT NOT NULL,
+    postUrl TEXT NOT NUll,
     postContent TEXT,
     views INTEGER DEFAULT 0,
     dislikes INTEGER DEFAULT 0,
