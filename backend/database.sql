@@ -16,8 +16,6 @@ CREATE TABLE posts(
     postUrl TEXT NOT NUll,
     postContent TEXT,
     views INTEGER DEFAULT 0,
-    dislikes INTEGER DEFAULT 0,
-    likes INTEGER DEFAULT 0,
     datePosted DATE NOT NULL DEFAULT CURRENT_DATE
 );
 
