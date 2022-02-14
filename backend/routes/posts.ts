@@ -23,22 +23,11 @@ router.post("/createpost", async (req, res) => {
 
 router.get("/", async (req, res) => {
     try {
-        const {postId} = req.body;
-        if (postId!= "") {
-            await pool.query(
-                'UPDATE posts SET views = views+1 WHERE id = $1',
-                [postId]
-            )
-            return res.send(await pool.query(
-                'SELECT * FROM posts WHERE Id = $1',
-                [postId]
-            ))
-        } else {
-            return res.send(await pool.query(
-                "SELECT * FROM posts",
-                []
-            ))
-        }
+        const allPosts = await pool.query(
+            "SELECT * FROM posts;",
+            []
+        );
+        return res.send({"posts": allPosts.rows})
     } catch {
         console.log("Failed to locate post");
         return res.sendStatus(400);
@@ -55,6 +44,30 @@ router.delete("/deletpost", async (req, res) => {
     } catch {
         console.log("Failed to delete post");
         return res.sendStatus(400);
+    }
+})
+
+router.get("/:postTitle", async (req, res) => {
+    try {
+        const specificPost = await pool.query(
+            "SELECT * FROM posts WHERE posturl = $1",
+            [req.params.postTitle]
+        );
+
+    
+        if (specificPost.rows == false) {
+            console.log("Post not found");
+            return res.sendStatus(404);
+        } else {
+            return res.send({
+                "post": specificPost.rows[0],
+                "console": "Work?"
+            });
+        }
+
+    } catch {   
+        console.log("Post not found");
+        return res.sendStatus(404);
     }
 })
 
