@@ -59,9 +59,14 @@ router.get("/:postTitle", async (req, res) => {
             console.log("Post not found");
             return res.sendStatus(404);
         } else {
+
+            await pool.query(
+                "UPDATE posts SET views = views+1 WHERE posturl = $1",
+                [req.params.postTitle]
+            )
+
             return res.send({
                 "post": specificPost.rows[0],
-                "console": "Work?"
             });
         }
 
