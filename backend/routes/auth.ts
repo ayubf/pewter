@@ -61,4 +61,29 @@ router.delete('/deleteuser', async (req, res) => {
     }
 })
 
+router.put("/updateuser", async (req, res) => {
+    try {
+        const {firstName, lastName, userName, newUserName ,userPass, newUserPass} = req.body;
+        const userIfExists = await pool.query("SELECT * FROM users WHERE username = $1;", [userName]);
+
+        if (userIfExists) {
+            if (await bcrypt.compare(userPass, userIfExists.rows[0].userpass)) {
+                await pool.query(
+                    "UPDATE users SET firstname = $1, lastname = $2, username = $3, userPass = $4 WHERE id = $5",
+                    [firstName, lastName, newUserName, newUserPass, userIfExists.rows[0].id]
+                )
+            }
+            return res.sendStatus(200);
+        } else {
+            console.log("Failed to update user");
+            return res.sendStatus(400);
+        }
+
+
+    } catch {
+        console.log("Failed to update user");
+        return res.sendStatus(400);
+    }
+})
+
 export default router
