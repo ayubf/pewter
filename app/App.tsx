@@ -1,13 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, Platform } from 'react-native';
 import {useState, useEffect} from 'react';
+import 'dotenv/config';
 
 export default function App() {
 
   let [name, setName] = useState("");
   let [serverResponse, setServerResponse] = useState();
 
-  const API_URL = Platform.OS === 'web' ? "http://localhost:3001/" : "http://10.0.0.86/3001"
+  const API_URL = Platform.OS === 'web' ? "http://localhost:3001/" : `http://${process.env.PRIV_IP}/3001`
   
 
   useEffect(() => {
