@@ -5,7 +5,7 @@ import {useState, useEffect} from 'react';
 export default function App() {
 
   let [name, setName] = useState("");
-  let [serverResponse, setServerResponse] = useState("");
+  let [serverResponse, setServerResponse] = useState();
 
   const API_URL = Platform.OS === 'web' ? "http://localhost:3001/" : "http://10.0.0.86/3001"
   
@@ -19,21 +19,20 @@ export default function App() {
         }
       })
       .then(res => res.json())
-      .then(data => setServerResponse(data.response))
+      .then(data => setServerResponse(data))
       .catch((error) => {
         console.log(error)
       })
     }
 
     pingServer()
-  })
-
+  }, [setServerResponse])
 
 
   return (
     <View style={styles.container}>
 
-    <Text> Server Response: {serverResponse} </Text>
+    <Text> Server Response: {} </Text>
       
       <TextInput 
         style={styles.inputText}
