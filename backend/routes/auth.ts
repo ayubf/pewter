@@ -1,5 +1,3 @@
-// Add update user route here and its done
-
 import express from 'express';
 
 
