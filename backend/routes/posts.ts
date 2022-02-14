@@ -1,6 +1,3 @@
-// Isnt this pretty much done as well?
-// Small update likes route left pretty much
-
 import express from 'express'
 
 const router = express.Router();
