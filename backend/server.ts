@@ -2,6 +2,7 @@ import express from 'express'
 
 import authRouter from './routes/auth'
 import postsRouter from './routes/posts'
+import usersRouter from './routes/users'
 
 const server = express();
 
@@ -26,5 +27,6 @@ server.use(express.json());
 
 server.use('/', authRouter);
 server.use('/posts', postsRouter)
+server.use('/users', usersRouter)
 
-server.listen(3001);
+server.listen(3002);
