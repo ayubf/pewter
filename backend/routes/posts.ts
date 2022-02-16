@@ -52,7 +52,7 @@ router.get("/:postTitle", async (req, res) => {
         );
 
     
-        if (specificPost.rows[0]) {
+        if (!specificPost.rows[0]) {
             console.log("Post not found");
             return res.sendStatus(404);
         } else {
