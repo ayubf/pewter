@@ -1,7 +1,10 @@
-const UserProfilePage = ({userName, joinDate, posts}: {userName: string, joinDate: Date, posts: []}) => {
+import {BrowserRouter as  Routes, Router, useParams} from "react-router-dom";
+const UserProfilePage = () => {
+    let { username } = useParams();
     return(
         <div>
             User Profile Page
+            {username}
         </div>
     )
 }
