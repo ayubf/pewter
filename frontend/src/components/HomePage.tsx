@@ -7,7 +7,7 @@ const HomePage = () => {
 
     useEffect(() => {
         const getPosts = async () => {
-            await fetch("http://localhost:3002/posts/", {
+            await fetch("http://localhost:3003/posts/", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
