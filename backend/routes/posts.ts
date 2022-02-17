@@ -54,7 +54,7 @@ router.get("/:postTitle", async (req, res) => {
     
         if (!specificPost.rows[0]) {
             console.log("Post not found");
-            return res.sendStatus(404);
+            return res.send(specificPost.rows);
         } else {
 
             await pool.query(

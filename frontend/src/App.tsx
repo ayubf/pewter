@@ -6,6 +6,7 @@ import SettingsPage from './components/SettingsPage';
 import SignupPage from './components/SignupPage';
 import UserProfilePage from './components/UserProfilePage';
 import NotFound from './components/NotFound';
+import Post from './components/Post';
 
 interface IPost {
   id: number,
@@ -59,6 +60,9 @@ function App() {
           {/* Map users and posts routes */}
           <Route path="/user">
             <Route path="/user/:username" element={<UserProfilePage />} />
+          </Route>
+          <Route path="/posts">
+            <Route path="/posts/:posturl" element={<Post />} />
           </Route>
           <Route path="/signup" element={<SignupPage/>} />
           <Route path="/login" element={<LoginPage />} />

@@ -1,13 +1,25 @@
 import {useState, useEffect} from 'react';
+import { BrowserRouter as Router, Route, useParams } from 'react-router-dom';
+import NotFound from './NotFound';
 
-const PostPage = (posturl: string) => {
+interface IPostDiv {
+    posttitle?: string,
+    postcontent?: string,
+    views?: number,
+    dateposted?: Date
+}
 
-    const [post, setPost] = useState({});
+const createPostDiv = (obj: IPostDiv) => obj;
+
+const PostPage = () => {
+
+    const { posturl } = useParams();
+    const [post, setPost] = useState(createPostDiv({}));
 
     useEffect(() => {
 
-        const getThisPost = async (url: string) => {
-            await fetch(`http://localhost:3001/posts/${url}`, {
+        const getThisPost = async () => {
+            await fetch(`http://localhost:3003/posts/${posturl}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -17,17 +29,26 @@ const PostPage = (posturl: string) => {
             .then(data => setPost(data.post))
         }
 
-        getThisPost(posturl)
+        getThisPost()
 
-    }, [post, setPost, posturl])
+    }, [posturl])
 
-    console.log(post)
-
-    return(
-        <div>
-            <h1>Post Page</h1>
-        </div>
-    )
+    if (post) {
+        return(
+            <div>
+                <h1>{post.posttitle}</h1>
+                <p>
+                    {post.postcontent}
+                </p>
+                <p>Date: {post.dateposted}</p>
+                
+            </div>
+        )
+    } else {
+        return(
+            <NotFound />
+        )
+    }
 }
 
 export default PostPage;
