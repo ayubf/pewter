@@ -29,4 +29,6 @@ server.use('/', authRouter);
 server.use('/posts', postsRouter)
 server.use('/users', usersRouter)
 
-server.listen(3002);
+//server.listen(3001);
+
+server.listen(3003);
